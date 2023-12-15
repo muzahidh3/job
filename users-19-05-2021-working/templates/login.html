@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block d-title %}
+    User Login
+{% endblock d-title %}
+
+{% block d-content %}
+
+<div class="card">
+  <div class="card-body register-card-body">
+    <p class="login-box-msg">Login</p>
+    
+    
+
+        {% if messages %}
+            <div class="msg-bg">
+            {% for message in messages %}
+            
+          {% if message.tags == "error" %}
+                <div class="login_error">
+                    <p style="color: red;"><i class="fas fa-exclamation-triangle"></i> {{message}}</p>
+                </div>
+          {% else %}
+                <div class="login_error">
+                    <p><i class="fas fa-check-circle"></i> {{message}}</p>
+                </div>
+             {% endif %} 
+                      
+            {% endfor %}
+                 </div>
+        {% endif %} 
+    
+
+
+
+    <form action="" method="POST">
+      {% csrf_token %}
+      <div id="first_page">
+        <div class="input-group mb-3">
+          <input type="text" name='username' class="form-control" placeholder="Username or Email" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-user"></span>
+            </div>
+          </div>
+        </div> 
+        <div class="input-group mb-3">
+          <input type="password" name="password" class="form-control" placeholder="Password" required>
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
+            </div>
+          </div>
+        </div>  
+            
+
+        <input class="btn btn-success float-right w-25" type="submit" value="Login">
+
+
+      </div> 
+
+    </form>  
+    <div class="d-block w-100 overflow-hidden mt-3 pt-2">
+      <p style="text-align: center; display:block" class="align-center">Forgot password? <a href="/password-reset/">here</a> to reset. </p>
+
+    </div>
+  </div>
+  <!-- /.form-box -->
+</div><!-- /.card -->
+ 
+
+{% endblock d-content %} 

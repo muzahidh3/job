@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block ac-title %}
+    User Login
+{% endblock ac-title %}
+
+{% block d-content %}
+<div class="logo text-center" id="main_logoa">
+  <a href="">
+      <img src="{% static '/img/logo.png' %}" alt="">
+  </a>
+</div>
+<div class="card">
+  <div class="card-body register-card-body">
+    <p class="login-box-msg">PFA</p>
+
+
+    <h2>{{ user.get_full_name }}</h2>
+<ul>
+  <li>Username: {{ user.username }}</li>
+  <li>Location: {{ request.user.profile.location }}</li>
+  <li>Division Name: {{ user.division_name }}</li>
+</ul>
+ 
+    <div class="d-block w-100 overflow-hidden mt-3 pt-2">
+      <p style="text-align: center; display:block" class="align-center">Forgot password? <a href="/password-reset/">here</a> to reset. </p>
+
+    </div>
+  </div>
+  <!-- /.form-box -->
+</div><!-- /.card -->
+ 
+
+{% endblock d-content %} 

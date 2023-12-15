@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block d-title %}
+    All JobCard's List
+{% endblock d-title %} 
+
+{% block d-content %} 
+
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-12"> 
+          <h1 class="m-0 text-dark float-left w-75">JobCard List</h1> 
+          </div> 
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div> 
+<section class="invest_request_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% for message in messages %}
+                    <p class="float-left mb-1" style="color: red;">{{message}}</p>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped text-center">
+                    <thead class="table-dark">
+                        <th>SL</th>
+                        <th>Type of Problem</th> 
+                        <th>Sr No</th>
+                        <th>Model No</th>
+                        <th>Created</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody class="text-center">
+                        
+                        {% for pending_to_engineer in pending_to_engineer %}
+                            <tr>
+                                <td class="align-middle">{{forloop.counter}}</td>
+                                <td class="align-middle">{{pending_to_engineer.type_of_problem}}</td>
+                                <td class="align-middle">{{pending_to_engineer.sr_no}}</td>
+                                <td class="align-middle">{{pending_to_engineer.model_no}}</td>
+                                <td class="align-middle">{{pending_to_engineer.date_created}}</td>
+                               
+                                <td class="align-middle text-center">
+                                                            
+<a href="{% url 'users:engineer-comments' pending_to_engineer.id %}" class="btn btn-warning btn-sm d-inline-block mr-1">View</a>
+                                                                     
+                                </td> 
+                                 
+                            </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section> 
+{% endblock d-content %} 
+{% block d-script %}
+    <script> 
+    </script>
+
+{% endblock d-script %}

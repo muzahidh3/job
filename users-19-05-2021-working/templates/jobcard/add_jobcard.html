@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block d-title %}
+    Add new Division
+{% endblock d-title %} 
+
+{% block d-content %} 
+
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-12"> 
+            <h1 class="m-0 text-dark float-left w-75">Add JobCard</h1> 
+             </div> 
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div>
+<section class="message_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% if messages %}  
+                    {% for message in messages %}
+                        <p class="pb-1" style="color: red;">{{message}}</p>
+                    {% endfor %} 
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<section class="invest_request_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-10">
+                <form action="" method="POST" id="indexForm" data-courses-url="{% url 'users:ajax_load_printers' %}">
+                    {% csrf_token %}
+                    <div class="card card-body"> 
+
+
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Category</label>
+                            <div class="col-sm-9">
+                <select name="problemcategory" class="form-control" id="problemcategory" required>
+               <option value="">Select Problem Category</option>
+              {% for problem_category in problem_category %}
+                <option value="{{problem_category.id}}">{{problem_category}}</option>
+              {% endfor %}
+                
+            </select>   
+                            </div>
+                        </div>
+
+
+            
+  <div class="form-group row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Name of Printer</label>
+                            <div class="col-sm-9">
+                             
+                             <select name="courses" id="courses" class="form-control">
+
+        </select>
+        
+              </div>
+                        </div>
+
+       <div class="form-group row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Problem</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="Type of problem" name="type_of_problem" class="form-control" required>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Sr No</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="Sr No" name="sr_no" class="form-control" required>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="inputName" class="col-sm-3 col-form-label">Model No</label>
+                            <div class="col-sm-9">
+                                <input type="text" placeholder="Model No" name="model_no" class="form-control" required>
+                            </div>
+                        </div>
+                                                
+
+                        <div class="form-group row"> 
+                            <div class="col-sm-9 offset-sm-3">
+                                <input class="btn btn-success" type="submit" value="Add">
+                            </div>
+                        </div> 
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>  
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script>
+    $("#problemcategory").change(function () {
+      var url = $("#indexForm").attr("data-courses-url");  // get the url of the `load_courses` view
+      var programmingId = $(this).val();  // get the selected programming ID from the HTML input
+
+      $.ajax({                       // initialize an AJAX request
+        url: url,                    // set the url of the request (= localhost:8000/load-courses/)
+        data: {
+          'programming': programmingId       // add the programming id to the GET parameters
+        },
+        success: function (data) {   // `data` is the return of the `load_courses` view function
+          $("#courses").html(data);  // replace the contents of the course input with the data that came from the server
+        }
+      });
+
+    });
+  </script>
+
+{% endblock d-content %}

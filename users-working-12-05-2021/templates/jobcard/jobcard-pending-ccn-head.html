@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block d-title %}
+    All JobCard's List
+{% endblock d-title %} 
+
+{% block d-content %} 
+
+<div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-12"> 
+          <h1 class="m-0 text-dark float-left w-75">JobCard List</h1> 
+          <a href="{% url 'users:add_jobcard' %}" class="btn btn-success float-right text-right">Add New JobCard</a>
+        </div> 
+      </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+  </div> 
+<section class="invest_request_area">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                {% for message in messages %}
+                    <p class="float-left mb-1" style="color: red;">{{message}}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+
+               <div class="row">
+            <div class="col">
+                {% for message in messages %}
+                    <p class="float-left mb-1" style="color: red;">{{message}}</p>
+                {% endfor %}
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-bordered table-striped text-center" id="myTable">
+                    <thead class="table-dark">
+                        <th>SL</th>
+                        <th>Type of Problem</th> 
+                        <th>Model No</th>
+                        <th> Assign Engineer</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody class="text-center">
+                        
+                        {% for p_ccn_jobcard_list in p_ccn_jobcard_list %}
+                            <tr>
+                                <td class="align-middle">{{forloop.counter}}</td>
+                                <td class="align-middle">{{p_ccn_jobcard_list.type_of_problem}}</td>
+                                <td class="align-middle">{{p_ccn_jobcard_list.model_no}}</td>
+                                <td class="align-middle"> 
+                                
+
+                                <select name="assigned_to" class="form-control" id=" required>
+                    <option value="">Select Name</option>
+                    {% for engineer in engineer_list %}
+                      <option value="{{engineer.id}}">{{engineer}}</option>
+                    {% endfor %}
+            </select>
+
+                                </td>
+                                <td class="align-middle">
+ <a href="{% url 'users:jobcard-assigned-by-ccn-head-to-engineer' p_ccn_jobcard_list.id %}" class="btn btn-success btn-sm d-inline-block mr-1">Assign</a>
+                                </td>
+                                                             
+                            </tr>
+                        {% endfor %} 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section> 
+
+<script>
+$(document).ready(function(){
+    $('#myTable').dataTable();
+});
+</script>
+
+{% endblock d-content %} 
+{% block d-script %}
+    <script> 
+    </script>
+
+{% endblock d-script %}
